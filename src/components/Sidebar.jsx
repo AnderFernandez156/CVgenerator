@@ -216,7 +216,7 @@ export const Sidebar = ({ estado, onChange , onListChange , deleteListInput , ad
 
       <Seccion>
       <SeccionHeader>Templates</SeccionHeader>
-      <select name="template" id="template" onChange={(e) => onTemplateChange(e.target.value)}>
+      <select name="template" id="template" value={estado.template} onChange={(e) => onTemplateChange(e.target.value)}>
         {templates.map((template, index) => <option value={index}>{template}</option>)}
       </select>
       </Seccion>
