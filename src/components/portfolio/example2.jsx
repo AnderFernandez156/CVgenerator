@@ -24,7 +24,6 @@ export default function  Example2 ({ estado }) {
     <>
     <Prueba>
         <Texto>NANER</Texto>
-        <Texto>xd</Texto>
 
         nombre: {estado.encabezado.nombre}
         <br/>
