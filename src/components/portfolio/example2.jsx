@@ -23,7 +23,7 @@ export default function  Example2 ({ estado }) {
   return (
     <>
     <Prueba>
-        <Texto>NANER</Texto>
+        <Texto>prueba</Texto>
 
         nombre: {estado.encabezado.nombre}
         <br/>
