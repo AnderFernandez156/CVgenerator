@@ -1,60 +1,129 @@
 import React from "react";
 import styled from "styled-components";
 
-const Prueba = styled.div` 
+const MainCV = styled.div` 
+background-color: #ffffff;
 width: 794px;
-height: 1122px;
-background-color: #ff4848;
+min-height: 1122px;
+display:flex;
+flex-direction:column;
+justify-content: flex-start;
 `
 
-const Lista = styled.div`
-height:auto ;
-display: flex ;
+const Section = styled.section`
+width: 90%;
+align-self: center;
+margin-top:15px ;
+margin-bottom:15px ;
+`
+const Encabezado = styled.div`
+display: flex;
 flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+const SectionTitle = styled.h3`
+font-family: Impact;
+`
+const Title = styled.h1`
+font-family: Impact;
+`
+
+const Underline = styled.hr`
+border:1px solid black;
+`
+const SectionContent = styled.section`
+width: 90%;
+margin-top:10px;
+margin-left: 60px;
+`
+const P = styled.p`
+white-space: pre-line;
+`
+const Raya = styled.div`
+height:30px;
+background-color:#424242;
+width:90% ;
+align-self: center;
+margin-top: 30px;
+margin-bottom:30px;
+`
+const Cuadrado = styled.div`
+width:20px;
+height: 30px;
+background-color:#ff0000;
+margin-left:50px;
 `
 
 export default function  Example1 ({ estado }) {
   return (
     <>
-    <Prueba>
-        nombre: {estado.encabezado.nombre}
-        <br/>
-        apellido: {estado.encabezado.apellido}
-        <br/>
-        Codigo postal: {estado.encabezado.codigo_postal}
-        <br/>
-        Numero movil: {estado.encabezado.n_movil}
-        <br/>
-        ciudad: {estado.encabezado.ciudad}
-        <br/>
-        Comunidad autonoma: {estado.encabezado.comunidad_autonoma}
-        <br/>
-        Correo: {estado.encabezado.correo}
-        <br/>
-        Resumen: {estado.resumen}
-        <br/>
+    <MainCV>
+      
+        <Raya>
+          <Cuadrado></Cuadrado>
+        </Raya>
+      
+      <Encabezado>
+        <Title>{estado.encabezado.nombre.toUpperCase()} {estado.encabezado.apellido.toUpperCase()}</Title>
+        <p>{estado.encabezado.codigo_postal}, {estado.encabezado.ciudad}, {estado.encabezado.comunidad_autonoma}</p>
+        <p>{estado.encabezado.n_movil}</p>
+        <p>{estado.encabezado.correo}</p>
+      </Encabezado>
+      <Section id='Resumen'>
+        <SectionTitle>RESUMEN PROFESIONAL</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+          <p>{estado.resumen}</p>
+        </SectionContent>
         
-        <Lista id="formacion">
-        <h3>Formacion</h3>
-          {estado.formacion.map((estudio) => <div key={estudio.id}>titulo:{estudio.titulo}, formacion:{estudio.localizacion}, fecha: {estudio.fecha}</div>)}
-        </Lista>
-        <Lista id="habilidades">
-          <h3>Habilidades</h3>
-          {estado.habilidades.map((habilidad) => <div key={habilidad.id}>{habilidad.titulo}</div>)}
-        </Lista>
-        <Lista id="aptitudes">
-        <h3>Aptitudes</h3>
-          {estado.aptitudes.map((aptitud) => <div key={aptitud.id}>{aptitud.titulo}</div>)}
-        </Lista>
-        <Lista id="historial">
-        <h3>Historial</h3>
-          {estado.historial.map((trabajo) => <div key={trabajo.id}>
+      </Section>
+      <Section id='Formacion'>
+        <SectionTitle>FORMACIÓN</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+          {estado.formacion.map((estudio) => 
+        <p key={estudio.id}><b>{estudio.titulo}</b><br/>{estudio.localizacion}  {estudio.fecha}</p>)}
+        </SectionContent>
+      </Section>
+      <Section id='Habilidades'>
+        <SectionTitle>HABILIDADES</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+          <ul>
+            {estado.habilidades.map((habilidad) => <li key={habilidad.id}>{habilidad.titulo}</li>)}
+          </ul>
+        </SectionContent>
+      </Section>
+      <Section id='Aptitudes'>
+        <SectionTitle>APTITUDES</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+          <ul>
+          {estado.aptitudes.map((aptitud) => <li key={aptitud.id}>{aptitud.titulo}</li>)}
+          </ul>
+        </SectionContent>
+      </Section>
+ 
+      <Section id='Historial'>
+        <SectionTitle>HISTORIAL LABORAL</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+          <ul>
+          {estado.historial.map((trabajo) => <li key={trabajo.id}>
             titulo:{trabajo.titulo}, empresa:{trabajo.empresa}, puesto: {trabajo.puesto} , fecha inicio: {trabajo.f_inicial}, fecha final: {trabajo.f_final}
-            </div>)}
-        </Lista>
-        Informacion adicional: {estado.infoAdicional}
-        template: {estado.template}
-        </Prueba>
+            </li>)}
+          </ul>
+        </SectionContent>
+      </Section>
+      <Section id='InformacionAdicional'>
+        <SectionTitle>INFORMACIÓN ADICIONAL</SectionTitle>
+        <Underline></Underline>
+        <SectionContent>
+         <P>{estado.infoAdicional}</P>
+        </SectionContent>
+      </Section>
+    </MainCV>
     </>
   )
 }

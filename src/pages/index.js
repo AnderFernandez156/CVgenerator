@@ -3,6 +3,21 @@ import { Sidebar } from '../components/Sidebar'
 import { Main } from '../components/Main'
 import { Data } from "../data/index";
 import { v4 as uuid }  from 'uuid'
+import styled from 'styled-components';
+import {device} from "../device/device";
+
+
+const Pagina = styled.div`
+  width:100% ;
+  height:100%;
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+
+  @media ${device.tablet}{
+    flex-direction:row;
+  }
+`
 const KEY = 'cvKey';
 export const Editor = () => { 
   const [state, setState] = useState(Data);
@@ -17,7 +32,7 @@ export const Editor = () => {
   },[state]);
 
   const templates = [
-     "template1",  "template2"
+     "template 1",  "template 2"
   ]
   const handleInputChange = (e) => {
     const {name,value} = e.target;
@@ -62,12 +77,15 @@ export const Editor = () => {
   }
 
   const addSeccionItem = (e,variable) =>{
-    const {name} = e.target;
-    const copiaState= state;
-    const obj = secciones[name]
-    obj.titulo= variable
-    copiaState[name].push(obj)
-    setState({...copiaState});
+    if(variable !== ""){
+      const {name} = e.target;
+      const copiaState= state;
+      const obj = secciones[name]
+      obj.titulo= variable
+      copiaState[name].push(obj)
+      setState({...copiaState});
+    }
+    
   }
 
   const deleteListInput = (e) => {
@@ -90,9 +108,9 @@ export const Editor = () => {
   }
   
   return (
-    <div>
+    <Pagina>
       <Sidebar estado={state} onChange={handleInputChange} onListChange={handleInputListChange} addSeccion={addSeccion}  deleteListInput={deleteListInput} addSeccionItem={addSeccionItem} clearForm={clearForm} templates={templates} onTemplateChange={onTemplateChange}/>
       <Main estado={state}/>
-    </div>
+    </Pagina>
   );
 }
